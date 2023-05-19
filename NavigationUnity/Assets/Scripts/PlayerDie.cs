@@ -9,11 +9,12 @@ public class PlayerDie : MonoBehaviour
     public GameObject playerMoveScript;
     public GameObject deathPanel;
     public Button restartButton;
-
+    public GameObject timeControllerObject;
     private Animator animator;
-
+    private GameStateController timeController;
     private void Start()
     {
+        timeController = timeControllerObject.GetComponent<GameStateController>();
         animator = GetComponent<Animator>();
 
         if (restartButton != null)
@@ -39,6 +40,8 @@ public class PlayerDie : MonoBehaviour
         if (deathPanel != null)
         {
             deathPanel.SetActive(true);
+            animator.enabled = false;
+            timeController.pauseGameTime();
         }
     }
 
